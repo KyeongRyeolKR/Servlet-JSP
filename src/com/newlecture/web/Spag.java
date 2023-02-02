@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet("/spag2")
 public class Spag extends HttpServlet {
@@ -26,6 +28,14 @@ public class Spag extends HttpServlet {
         }
 
         request.setAttribute("model", model);  // 값을 request에 담음
+
+        String[] names = {"newlec", "dragon"};
+        request.setAttribute("names", names);
+
+        Map<String, Object> notice = new HashMap<>();
+        notice.put("id", 1);
+        notice.put("title", "EL은 좋아요");
+        request.setAttribute("notice", notice);
 
         // forward
         RequestDispatcher dispatcher = request.getRequestDispatcher("spag2.jsp");
