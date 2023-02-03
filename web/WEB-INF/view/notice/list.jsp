@@ -1,16 +1,7 @@
-<%@ page import="com.newlecture.web.info.PrivateInfo" %>
-<%@ page import="java.sql.*" %>
+<%@ page import="com.newlecture.web.entity.Notice" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-
-<%
-    String sql = "SELECT * FROM NOTICE";
-
-    Class.forName(PrivateInfo.driver);
-    Connection con = DriverManager.getConnection(PrivateInfo.url, PrivateInfo.uid, PrivateInfo.pwd);
-    Statement st = con.createStatement();
-    ResultSet rs = st.executeQuery(sql);
-%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -78,8 +69,8 @@
                     <h1 class="hidden">회원메뉴</h1>
                     <ul>
                         <li><a href="/myindex.html">HOME</a></li>
-                        <li><a href="/member/login.html">로그인</a></li>
-                        <li><a href="/member/agree.html">회원가입</a></li>
+                        <li><a href="/WEB-INF/view/member/login.html">로그인</a></li>
+                        <li><a href="/WEB-INF/view/member/agree.html">회원가입</a></li>
                     </ul>
                 </nav>
 
@@ -87,7 +78,7 @@
                     <h1 class="hidden">고객메뉴</h1>
                     <ul class="linear-layout">
                         <li><a href="/member/home"><img src="/images/txt-mypage.png" alt="마이페이지"/></a></li>
-                        <li><a href="/notice/list.html"><img src="/images/txt-customer.png" alt="고객센터"/></a></li>
+                        <li><a href="/WEB-INF/view/notice/list.html"><img src="/images/txt-customer.png" alt="고객센터"/></a></li>
                     </ul>
                 </nav>
 
@@ -185,15 +176,19 @@
                     </thead>
                     <tbody>
 
-                    <%while(rs.next()){%>
+                    <%
+                        List<Notice> list = (List<Notice>) request.getAttribute("list");
+                        for(Notice n : list){
+                            pageContext.setAttribute("n", n);
+                    %>
                     <tr>
-                        <td><%=rs.getInt("ID")%></td>
-                        <td class="title indent text-align-left"><a href="detail?id=<%=rs.getInt("ID")%>"><%=rs.getString("TITLE")%></a></td>
-                        <td><%=rs.getString("WRITER_ID")%></td>
-                        <td>
-                            <%=rs.getDate("REGDATE")%>
+                        <td>${n.id}</td>
+                        <td class="title indent text-align-left">
+                            <a href="detail?id=${n.id}">${n.title}</a>
                         </td>
-                        <td><%=rs.getInt("HIT")%></td>
+                        <td>${n.writerId}</td>
+                        <td>${n.regDate}</td>
+                        <td>${n.hit}</td>
                     </tr>
                     <%}%>
 
@@ -269,9 +264,3 @@
 </body>
 
 </html>
-
-<%
-    rs.close();
-    st.close();
-    con.close();
-%>

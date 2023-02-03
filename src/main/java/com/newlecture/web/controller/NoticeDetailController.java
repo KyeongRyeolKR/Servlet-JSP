@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.sql.*;
 
 /**
- * 공지사항 상세보기를 위한 컨트롤러
+ * 공지사항 게시글 상세보기를 위한 컨트롤러
  */
 @WebServlet("/notice/detail")
 public class NoticeDetailController extends HttpServlet {
@@ -64,7 +64,7 @@ public class NoticeDetailController extends HttpServlet {
         // redirect -> 단순히 페이지를 옮기고 싶을 때 사용
         // forward -> 하고 있던 작업을 그대로 서블릿으로 옮기고 싶을 때 사용
         // 심어준 값을 그대로 detail.jsp로 넘겨준다. (forward)
-        request.getRequestDispatcher("/notice/detail.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/notice/detail.jsp").forward(request, response);
 
     }
 }

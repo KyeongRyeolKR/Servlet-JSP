@@ -22,5 +22,15 @@
     <orderEntry type="library" name="tomcat.servlet" level="project" />
     <orderEntry type="library" name="jsp-api" level="project" />
     <orderEntry type="library" name="ojdbc11" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../TOOLS/jstl-1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="jstl-1.2" level="project" />
   </component>
 </module>
