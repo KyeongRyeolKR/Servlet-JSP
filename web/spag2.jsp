@@ -13,7 +13,7 @@ ${requestScope.model}<br>        <%--request 저장소--%>
 ${names[1]}<br>                  <%--request 저장소--%>
 ${notice.title}<br>              <%--request 저장소--%>
 ${pageScope.model}<br>                         <%--pageContext 저장소--%>
-${param.n}<br>
+${empty param.n ? "값이 비어 있습니다." : param.n}<br>
 ${header.accept}
 </body>
 </html>
